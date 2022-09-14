@@ -1,0 +1,8 @@
+./bin/*
+
+
+./output/*
+./savefiles/*
+./SEAL/*
+all_models_final.csv
+combine_result_test.py
