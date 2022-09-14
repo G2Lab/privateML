@@ -38,8 +38,8 @@ int main(int argc, char *argv[])
     BatchEncoder batch_encoder(context);
     int slot_count = batch_encoder.slot_count();
 
-    // string geno = "../data/testset.tsv";
-    string geno = "../data/genotypes.txt";
+    string geno = "../data/testset.tsv";
+    // string geno = "../data/genotypes.txt";
     string coef = "../weights/coeff" + phenotype + ".txt";
     string intercept = "../weights/intercept" + phenotype + ".txt";
     
@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
     If element is negative, insert positive element (-element) as coefficient
     If element is positive, insert plain_modulus - element as coefficient
     */
-    int scaling = pow(2, 25);
+    int scaling = pow(2, 20);
     string modelname = "../savefiles/model_ctxt" + phenotype + ".dat";
     
     auto start_enc_model = std::chrono::high_resolution_clock::now();
