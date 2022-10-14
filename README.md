@@ -1,5 +1,5 @@
 # Privacy-preserving prediction of phenotypes from genotypes using homomorphic encryption
-This is a supplementary code for a paper submitting RECOMB 2023
+The implementation uses C++ and Microsoft SEAL library.
 
 ## How to run
 
