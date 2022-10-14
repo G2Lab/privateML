@@ -38,13 +38,13 @@ int main(int argc, char *argv[])
     BatchEncoder batch_encoder(context);
     int slot_count = batch_encoder.slot_count();
 
-    string geno = "../data/testset.tsv";
-    string coef = "../weights/weight" + phenotype + ".csv";
+    string geno = "data/testset.tsv";
+    string coef = "weights/weight" + phenotype + ".csv";
     
     int num_samples;
 
     auto start_enc_geno = std::chrono::high_resolution_clock::now();
-    string filename = "../savefiles/genotype_ctxt" + phenotype + ".dat";
+    string filename = "savefiles/genotype_ctxt" + phenotype + ".dat";
     cout << "\n-----------ENCRYPTING GENOTYPE (Client) -----------\n"
          << endl;
     cout << "\nReading in the genotype:" << endl;
@@ -101,8 +101,8 @@ int main(int argc, char *argv[])
     If element is negative, insert positive element (-element) as coefficient
     If element is positive, insert plain_modulus - element as coefficient
     */
-    int scaling = pow(2, 20);
-    string modelname = "../savefiles/model_ctxt" + phenotype + ".dat";
+    int scaling = pow(2, 15);
+    string modelname = "savefiles/model_ctxt" + phenotype + ".dat";
     
     auto start_enc_model = std::chrono::high_resolution_clock::now();
     cout << "\n-----------ENCRYPTING MODEL (Modeler) -----------\n"
@@ -216,7 +216,7 @@ int main(int argc, char *argv[])
         predictions.push_back(wg[0]);
     }
     //// SAVING RESULTS
-    string resultsname = "../savefiles/cipherresults" + phenotype + ".dat";
+    string resultsname = "savefiles/cipherresults" + phenotype + ".dat";
     cout << "save results into " << resultsname << endl;
     SaveVec(predictions, resultsname);
     auto end_eval = std::chrono::high_resolution_clock::now();
@@ -242,7 +242,7 @@ int main(int argc, char *argv[])
     cout << "\n-----------Saving RESULTS-----------\n"
          << endl;
     vector<double> final_result;
-    for (int sample = 0; sample < 198; sample++)
+    for (int sample = 0; sample < num_samples; sample++)
     {
         double final;
         if (pt_result[sample].data()[0] > plain_modulus / 2)
@@ -258,7 +258,7 @@ int main(int argc, char *argv[])
 
     ofstream ofs;
 
-    SaveResult(final_result, "../output/out_model" + phenotype + ".csv");
+    SaveResult(final_result, "output/out_model" + phenotype + ".csv");
 
     auto duration_enc_geno = std::chrono::duration_cast<std::chrono::milliseconds>(end_enc_geno - start_enc_geno);
     auto duration_enc_model = std::chrono::duration_cast<std::chrono::milliseconds>(end_enc_model - start_enc_model);

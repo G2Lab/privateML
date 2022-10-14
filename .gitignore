@@ -1,8 +1,8 @@
-./bin/*
-
-
-./output/*
-./savefiles/*
-./SEAL/*
+bin/*
+output/*
+savefiles/*
+SEAL/*
+!output/.gitkeep 
+!savefiles/.gitkeep 
 all_models_final.csv
 combine_result_test.py

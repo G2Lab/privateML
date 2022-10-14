@@ -1,18 +1,24 @@
-# iDASH 2022 Solution: Task 2
-This is the solution of task 2 of G2Lab for iDASH competition in 2022.
+# Privacy-preserving prediction of phenotypes from genotypes using homomorphic encryption
+This is a supplementary code for a paper submitting RECOMB 2023
 
 ## How to run
 
 ### SEAL library
-We use SEAL library for HE scheme. In this docker, SEAL is already compiled, so you don't have to re-run it. However, if you find any trouble with it, then please follow the guide in the README file of SEAL to compile it again
+We use SEAL library for HE scheme. After pulling the code from github, build SEAL manually following the guide of its README.  
+
+```bash
+    git clone https://github.com/microsoft/SEAL.git
+    cd SEAL
+    cmake -S . -B build
+    cmake --build build
+    cd ..
+```
 
 ### Build
 Run CMake file to make binary file
 ```bash
-    mkdir bin
-    cd bin
-    cmake ..
-    make -j
+    cmake -S . -B bin
+    cmake --build bin
 ```
 As a result, you get two outputs: binary and continous.
 
@@ -21,10 +27,10 @@ As a result, you get two outputs: binary and continous.
 Run the following arguments.
 ```bash
     for pheno in 1 2 3;
-        do ./continuous $pheno;
+        do ./bin/continuous $pheno;
     done
     for pheno in 4 5;
-        do ./binary $pheno;
+        do ./bin/binary $pheno;
     done
 ```
 Otherwise, of course you can run each model one by one, or run one of following argument if you want to see the result of one model.
@@ -40,7 +46,6 @@ They measure the time for each step and print at the end of the running. During 
 ## Accruacy
 We provide python code for computing accruacies and combining outputs. Run following python code.
 ```bash
-    cd ./
     python combine_result.py
 ```
 As a result, the combined outputs are saved in the file `./all_models_final.csv`.
